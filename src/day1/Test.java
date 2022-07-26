@@ -5,6 +5,7 @@
 package day1;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
@@ -23,7 +24,7 @@ public class Test {
             System.out.println(course);
         }
         courses.sort(Comparator.naturalOrder()); //compare all List
-        System.out.println("---------------");
+        System.out.println("-----Simple Sort----------");
         // courses.forEach(course -> System.out.println(course));
         //courses.forEach(System.out::println);
 
@@ -32,9 +33,19 @@ public class Test {
                  .filter(Course::lessThanThree)
                  .forEachOrdered(System.out::println);
     }
+    public static void creditSort(){
+        System.out.println("-----Credit Sort----------");
+        CreditCompare creditCom = new CreditCompare();
+        Collections.sort(courses,creditCom);
+        for(Course course : courses){
+            System.out.println(course);
+        }
+    }
     
     public static void main(String[] args) {
               courseListInitializatiob();
               simpleSort();
+              creditSort();
+             
     }
 }

@@ -9,6 +9,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.StringJoiner;
 
 public class Test {
     public static List<Course> courses = new LinkedList<>();
@@ -38,27 +39,43 @@ public class Test {
                     ))
                  .forEachOrdered(System.out::println);
     }
-    public static void creditSort(){
-        System.out.println("-----Credit Sort----------");
-        CreditCompare creditCom = new CreditCompare();
-        courses.sort(creditCom);
-        for(Course course : courses){
-            System.out.println(course);
-        }
+
+    
+
+    private static void similarityMatching(){
+        courses.stream()
+            .map(Course::getDescription)
+            .map(Text::showFeature)
+            .forEach(System.out::println);
+        System.out.println("--------------------");
+        courses.stream()
+        .filter(c->c.getDescription().computeSimilarity("programming")>0.0)
+        .forEach(System.out::println);
+        
     }
-    public static void descriptionSort(){
-        System.out.println("-----Description Sort----------");
-        DescriptionCompare descripCom = new DescriptionCompare();
-       courses.sort(descripCom);
-        for(Course course : courses){
-            System.out.println(course);
-        }
-    }
+    // public static void creditSort(){
+    //     System.out.println("-----Credit Sort----------");
+    //     CreditCompare creditCom = new CreditCompare();
+    //     courses.sort(creditCom);
+    //     for(Course course : courses){
+    //         System.out.println(course);
+    //     }
+    // }
+    // public static void descriptionSort(){
+    //     System.out.println("-----Description Sort----------");
+    //     DescriptionCompare descripCom = new DescriptionCompare();
+    //    courses.sort(descripCom);
+    //     for(Course course : courses){
+    //         System.out.println(course);
+    //     }
+    // }
     
     public static void main(String[] args) {
               courseListInitializatiob();
               simpleSort();
-              creditSort();
-             descriptionSort();
+            //   creditSort();
+            //  descriptionSort();
+
+            similarityMatching();
     }
 }

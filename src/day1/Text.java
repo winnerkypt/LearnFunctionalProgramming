@@ -3,7 +3,7 @@ package day1;
 
 import java.util.Map;
 
-public class Text {
+public class Text implements Comparable<Text> {
     private String content;
     private Map<String,Double> feature;
 
@@ -31,5 +31,10 @@ public class Text {
 
     public void setFeature(Map<String, Double> feature) {
         this.feature = feature;
+    }
+
+    @Override
+    public int compareTo(Text o) {
+      return this.content.compareTo(o.content);
     }
 }

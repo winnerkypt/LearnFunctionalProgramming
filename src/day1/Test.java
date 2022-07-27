@@ -18,7 +18,7 @@ public class Test {
         courses.add(new Course("int201",3.0,"frontend"));
         courses.add(new Course("int102",2.5,"winner"));
         courses.add(new Course("int102",2.5,"backend"));
-        
+        // courses.add(null);        
     }
     public static void simpleSort(){
         for(Course course : courses){
@@ -31,13 +31,17 @@ public class Test {
 
          courses.parallelStream() //each core of cpu but sequential will do in 1 core
 //                 .filter(c->c.getCredit()<3) //check credit < 3
-                 .filter(Course::lessThanThree)
+                 .sorted(Comparator.nullsLast(
+                    // Comparator.comparing(Course::getDescription).reversed()))  [sort by description]
+                    Comparator.comparingDouble(Course::getCredit).reversed()
+                    .thenComparing(Comparator.comparing(Course::getDescription))
+                    ))
                  .forEachOrdered(System.out::println);
     }
     public static void creditSort(){
         System.out.println("-----Credit Sort----------");
         CreditCompare creditCom = new CreditCompare();
-        Collections.sort(courses,creditCom);
+        courses.sort(creditCom);
         for(Course course : courses){
             System.out.println(course);
         }
@@ -45,7 +49,7 @@ public class Test {
     public static void descriptionSort(){
         System.out.println("-----Description Sort----------");
         DescriptionCompare descripCom = new DescriptionCompare();
-        Collections.sort(courses,descripCom);
+       courses.sort(descripCom);
         for(Course course : courses){
             System.out.println(course);
         }

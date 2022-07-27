@@ -17,7 +17,7 @@ public class Test {
         courses.add(new Course("int101",3.0,"compro"));
         courses.add(new Course("int201",3.0,"frontend"));
         courses.add(new Course("int202",2.5,"backend"));
-        courses.add(new Course("int102",2.5,"aa"));
+        courses.add(new Course("int102",2.5,"winner"));
     }
     public static void simpleSort(){
         for(Course course : courses){
@@ -41,11 +41,19 @@ public class Test {
             System.out.println(course);
         }
     }
+    public static void descriptionSort(){
+        System.out.println("-----Description Sort----------");
+        DescriptionCompare descripCom = new DescriptionCompare();
+        Collections.sort(courses,descripCom);
+        for(Course course : courses){
+            System.out.println(course);
+        }
+    }
     
     public static void main(String[] args) {
               courseListInitializatiob();
               simpleSort();
               creditSort();
-             
+             descriptionSort();
     }
 }
